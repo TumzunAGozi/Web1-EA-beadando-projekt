@@ -1,0 +1,14 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Open tablazat.html",
+            "file": "d:\\USB-meghajtó\\Webprog\\2025EA\\Web1-EA-beadandó-projekt\\Web1-EA-beadando-projekt\\tablazat.html"
+        }
+    ]
+}

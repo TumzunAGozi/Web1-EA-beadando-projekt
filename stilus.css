@@ -1,6 +1,6 @@
 header {
     border-radius: 10px;
-    background-color: yellow;
+    background-color: gray;
     padding: 10px;
     margin: 10px;
     }
@@ -23,11 +23,9 @@ header {
     background-color: #FF6600;
     }
     nav ul {
-    list-style-type: none;
-    margin: 0px;
-    padding: 15px 0px;
-    nav ul li {
-    padding: 0px 15px;
+        list-style-type: none;
+        margin: 0px;
+        padding: 15px 0px;
     }
     nav ul li.active {
     border-right: 5px solid blue;
@@ -57,4 +55,3 @@ header {
     padding: 5px 20px;
     background-color: #CC99FF;
     }
-}

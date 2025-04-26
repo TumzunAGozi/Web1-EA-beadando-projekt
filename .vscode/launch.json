@@ -7,8 +7,8 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Open tablazat.html",
-            "file": "d:\\USB-meghajtó\\Webprog\\2025EA\\Web1-EA-beadandó-projekt\\Web1-EA-beadando-projekt\\tablazat.html"
+            "name": "Open index.html",
+            "file": "d:\\USB-meghajtó\\Webprog\\2025EA\\Web1-EA-beadandó-projekt\\Web1-EA-beadando-projekt\\index.html"
         }
     ]
 }

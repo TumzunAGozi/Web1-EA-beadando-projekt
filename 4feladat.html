@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>4. feladat</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body {
+font-family: 'Arial', sans-serif;
+margin: 20px;
+text-align: center;
+}
+h1 {
+color: green;
+}
+canvas {
+    border: 2px solid #858080;
+}
+</style>
+</head>
+<body>
+    <header>
+        <h1 class="header">Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Kezdőlap</a></li>
+            <li><a href="introduction.html">Bemutatkozás</a></li>
+            <li><a href="contact.html">Kapcsolat</a></li>
+            <li><a href="cikkek.html">Cikkek</a></li>
+            <li><a href="tablazat.html">Táblázat</a></li>
+            <li><a href="3feladat.html">3. feladat</a></li>
+            <li><a href="4feladat.html" class="active">4. feladat</a></li>
+        </ul>
+    </nav>
+<h1>ChartJS</h1>
+    <h2>Vonal-diagram minta</h2>
+    <canvas id="myLineChart" width="380" height="180"></canvas>
+    
+<script>
+// data for showing the line chart
+let labels = ['Január', 'Február', 'Március', 'Április', 'Május'];
+let dataset1Data = [65, 59, 80, 81, 56];
+let dataset2Data = [28, 48, 40, 19, 86];
+let dataset3Data = [18, 48, 40, 29, 86];
+let dataset4Data = [20, 15, 28, 22, 10];
+let dataset5Data = [0, 10, 20, 30, 45];
+// Creating line chart
+let ctx = document.getElementById('myLineChart').getContext('2d');
+let myLineChart = new Chart(ctx, {
+type: 'line',
+data: {
+labels: labels,
+datasets: [
+{
+label: 'Egyes',
+data: dataset1Data,
+borderColor: 'blue',
+borderWidth: 2,
+fill: false,
+},
+{
+label: 'Kettes',
+data: dataset2Data,
+borderColor: 'red',
+borderWidth: 2,
+fill: false,
+},
+{
+label: 'Hármas',
+data: dataset3Data,
+borderColor: 'yellow',
+borderWidth: 2,
+fill: false,
+},
+{
+label: 'Négyes',
+data: dataset4Data,
+borderColor: 'green',
+borderWidth: 2,
+fill: false,
+},
+{
+label: 'Ötös',
+data: dataset5Data,
+borderColor: 'black',
+borderWidth: 2,
+fill: false,
+}
+]
+},
+options: {
+responsive: true,
+scales: {
+x: {
+title: {
+display: true,
+text: 'Jegyek',
+font: {
+padding: 4,
+size: 20,
+weight: 'bold',
+family: 'Arial'
+},
+color: 'darkblue'
+}
+},
+y: {
+title: {
+display: true,
+text: 'db',
+font: {
+size: 20,
+weight: 'bold',
+family: 'Arial'
+},
+color: 'darkblue'
+},
+beginAtZero: true,
+scaleLabel: {
+display: true,
+labelString: 'Values',
+                }
+            }
+        }
+    }
+});
+</script>
+<footer>Marton Tamás (S70LPH)</footer>
+</body>
+</html>

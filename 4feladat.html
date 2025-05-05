@@ -1,133 +1,275 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>4. feladat</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-body {
-font-family: 'Arial', sans-serif;
-margin: 20px;
-text-align: center;
-}
-h1 {
-color: green;
-}
-canvas {
-    border: 2px solid #858080;
-}
-</style>
-</head>
-<body>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ChartJS táblázattal</title>
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+      .chartMenu {
+        width: 100vw;
+        height: 40px;
+        background: #1A1A1A;
+        color: rgba(54, 162, 235, 1);
+      }
+      .chartMenu p {
+        padding: 10px;
+        font-size: 20px;
+      }
+      .chartCard {
+        width: 100vw;
+        height: calc(100vh - 40px);
+        background: rgba(54, 162, 235, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .chartBox {
+        width: 700px;
+        padding: 20px;
+        border-radius: 20px;
+        border: solid 3px rgba(54, 162, 235, 1);
+        background: white;
+      }
+      .chartjs-table, th, td {
+        border-collapse: collapse;
+        border: 1px solid black;
+        padding: 10px;
+      }
+      .chartjs-thead {
+        font-weight: bold;
+      }
+      .chartjs-tbody {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
     <header>
         <h1 class="header">Web-programozás-1 Előadás Házi feladat</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="index.html">Kezdőlap</a></li>
-            <li><a href="introduction.html">Bemutatkozás</a></li>
-            <li><a href="contact.html">Kapcsolat</a></li>
-            <li><a href="cikkek.html">Cikkek</a></li>
-            <li><a href="tablazat.html">Táblázat</a></li>
-            <li><a href="3feladat.html">3. feladat</a></li>
-            <li><a href="4feladat.html" class="active">4. feladat</a></li>
-        </ul>
-    </nav>
-<h1>ChartJS</h1>
-    <h2>Vonal-diagram minta</h2>
-    <canvas id="myLineChart" width="380" height="180"></canvas>
-    
-<script>
-// data for showing the line chart
-let labels = ['Január', 'Február', 'Március', 'Április', 'Május'];
-let dataset1Data = [65, 59, 80, 81, 56];
-let dataset2Data = [28, 48, 40, 19, 86];
-let dataset3Data = [18, 48, 40, 29, 86];
-let dataset4Data = [20, 15, 28, 22, 10];
-let dataset5Data = [0, 10, 20, 30, 45];
-// Creating line chart
-let ctx = document.getElementById('myLineChart').getContext('2d');
-let myLineChart = new Chart(ctx, {
-type: 'line',
-data: {
-labels: labels,
-datasets: [
-{
-label: 'Egyes',
-data: dataset1Data,
-borderColor: 'blue',
-borderWidth: 2,
-fill: false,
-},
-{
-label: 'Kettes',
-data: dataset2Data,
-borderColor: 'red',
-borderWidth: 2,
-fill: false,
-},
-{
-label: 'Hármas',
-data: dataset3Data,
-borderColor: 'yellow',
-borderWidth: 2,
-fill: false,
-},
-{
-label: 'Négyes',
-data: dataset4Data,
-borderColor: 'green',
-borderWidth: 2,
-fill: false,
-},
-{
-label: 'Ötös',
-data: dataset5Data,
-borderColor: 'black',
-borderWidth: 2,
-fill: false,
-}
-]
-},
-options: {
-responsive: true,
-scales: {
-x: {
-title: {
-display: true,
-text: 'Jegyek',
-font: {
-padding: 4,
-size: 20,
-weight: 'bold',
-family: 'Arial'
-},
-color: 'darkblue'
-}
-},
-y: {
-title: {
-display: true,
-text: 'db',
-font: {
-size: 20,
-weight: 'bold',
-family: 'Arial'
-},
-color: 'darkblue'
-},
-beginAtZero: true,
-scaleLabel: {
-display: true,
-labelString: 'Values',
-                }
+        </header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Kezdőlap</a></li>
+                <li><a href="introduction.html">Bemutatkozás</a></li>
+                <li><a href="contact.html">Kapcsolat</a></li>
+                <li><a href="cikkek.html">Cikkek</a></li>
+                <li><a href="tablazat.html">Táblázat</a></li>
+                <li><a href="3feladat.html">3. feladat</a></li>
+                <li><a href="4feladat.html" class="active">4. feladat</a></li>
+            </ul>
+        </nav>
+        <h1>4. feladat oldal</h1>
+    <div class="chartMenu">
+      <p>WWW.CHARTJS3.COM (Chart JS <span id="chartVersion"></span>)</p>
+    </div>
+    <div class="chartCard">
+      <div class="chartBox">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+    <script>
+    // setup 
+    const data = {
+      labels: ['Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat', 'Vasárnap'],
+      datasets: [{
+        label: 'Szept-Okt',
+        data: [18, 12, 6, 9, 12, 3, 9],
+        backgroundColor: [
+          'rgba(255, 26, 104, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(0, 0, 0, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 26, 104, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(0, 0, 0, 1)'
+        ],
+        borderWidth: 1
+      },{
+        label: 'Nov-Dec',
+        data: [9, 6, 3, 4.5, 6, 1.5, 4.5],
+        backgroundColor: [
+          'rgba(255, 26, 104, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(0, 0, 0, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 26, 104, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(0, 0, 0, 1)'
+        ],
+        borderWidth: 1
+      },{
+        label: 'Jan-Feb',
+        data: [7, 15, 21, 17, 9, 3, 9],
+        backgroundColor: [
+          'rgba(255, 26, 104, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(0, 0, 0, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 26, 104, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(0, 0, 0, 1)'
+        ],
+        borderWidth: 1
+      },{
+        label: 'Mar-Ápr',
+        data: [20, 13, 6, 2, 4, 8, 12],
+        backgroundColor: [
+          'rgba(255, 26, 104, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(0, 0, 0, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 26, 104, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(0, 0, 0, 1)'
+        ],
+        borderWidth: 1
+      },{
+        label: 'Máj-Jún',
+        data: [14, 10, 7, 9, 12, 4, 9],
+        backgroundColor: [
+          'rgba(255, 26, 104, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(0, 0, 0, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 26, 104, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(0, 0, 0, 1)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    // config 
+    const config = {
+      type: 'bar',
+      data,
+      options: {
+        plugins: {
+            legend: {
+                position: 'bottom',
+                align: 'start'
             }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         }
-    }
-});
-</script>
-<footer>Marton Tamás (S70LPH)</footer>
-</body>
+      }
+    };
+
+    // render init block
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+
+    function createTable() {
+    console.log('triggered');
+    const chartBox = document.querySelector('.chartBox');
+    const tableDiv = document.createElement('DIV');
+    tableDiv.setAttribute('id', 'tableDiv'); //assign ID
+
+    const table = document.createElement('TABLE');
+    table.classList.add('chartjs-table');
+
+    //add thead
+    const thead = table.createTHead();
+    //thead.classList.add('chartjs-thead');
+
+    thead.insertRow(0);
+
+    for(let i = 0; i < data.labels.length; i++) {
+        thead.rows[0].insertCell(i).innerText = data.labels[i];
+        thead.rows[0].cells[i].style.color = data.datasets[0].borderColor[i];
+    };
+    thead.rows[0].insertCell(0).innerText = 'Dátum';
+
+
+    // tbody
+    const tbody = table.createTBody();
+    table.classList.add('chartjs-tbody');
+
+    console.log(data.datasets)
+    data.datasets.map((dataset, index) =>{
+        tbody.insertRow(index);
+        for(let i = 0;i < data.datasets[0].data.length; i++){
+            tbody.rows[index].insertCell(i).innerText = dataset.data[i];
+        };
+        tbody.rows[index].insertCell(0).innerText = dataset.label;
+    })
+
+    //<table>
+    // <thead>
+    //  <tr>
+    //   <td></td>
+    //  </tr>
+    // </thead>
+    //</table>
+
+    // append
+    chartBox.appendChild(tableDiv);
+    tableDiv.appendChild(table);
+   };
+
+    // Instantly assign Chart.js version
+    const chartVersion = document.getElementById('chartVersion');
+    chartVersion.innerText = Chart.version;
+
+    createTable();
+    </script>
+    <footer>Marton Tamás (S70LPH)</footer>
+  </body>
 </html>
